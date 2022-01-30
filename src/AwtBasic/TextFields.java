@@ -1,31 +1,45 @@
 package AwtBasic;
 
-
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
+class textField extends Frame implements TextListener, ActionListener
+{
+    TextField tf;
+    Label l1, l2;
+    textField()
+    {
+        super("Text Field demo");
+        l1=new Label("Anything is not entered yet");
+        l2=new Label("Enter is not hit yet");
+        tf=new TextField(20);
+        tf.addTextListener(this);
+        tf.addActionListener(this);
+        setLayout(new FlowLayout());
+        add(l1);
+        add(l2);
+        add(tf);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        l2.setText(tf.getText());
+    }
+
+    @Override
+    public void textValueChanged(TextEvent e) {
+l1.setText(tf.getText());
+    }
+}
 
 
 public class TextFields {
-
-    TextFields()
-    {
-
-
-        Frame f;
-        f=new Frame("TextField example");
-        TextField t1, t2;
-        t1=new TextField("Welcome to Divyanshu world");
-        t1.setBounds(50, 100, 200, 30);
-        t2=new TextField("AWT Basic");
-        t2.setBounds(50, 150, 200, 30);
-        f.add(t1);
-        f.add(t2);
-        f.setSize(400, 400);
-        f.setLayout(null);
-        f.setVisible(true);
-
-    }
     public static void main(String[] args) {
-     new TextFields();
+        textField t=new textField();
+        t.setSize(300, 300);
+        t.setVisible(true);
     }
 }
